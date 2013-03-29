@@ -1,6 +1,6 @@
 /**
- * Knockout bootstrap pageable data table
- * https://github.com/labory/knockout-bootstrap-data-table
+ * Knockout bootstrap pageable and sortable data table
+ * https://github.com/labory/knockout-bootstrap-sortable-data-table
  */
 
 (function () {
