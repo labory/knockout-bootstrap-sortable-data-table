@@ -31,6 +31,9 @@
                 self.columns.push(new TableColumn(column));
             }
             self.sorting = {sortColumn : null, sortOrder: ""};
+            self.comparator = config.comparator || function (a, b) {
+                return a && b && a.id && b.id ? a.id === b.id : a === b;
+            };
             self.totalPages = ko.observable();
             self.pageIndex = ko.observable(0);
             self.pageSize = ko.observable(config.pageSize || 10);
@@ -105,6 +108,7 @@
         .header:after {content: "";float: right;margin-top: 7px;visibility: hidden;}\
         .sortDown:after {border-width: 0 4px 4px;border-style: solid;border-color: #000 transparent;visibility: visible;}\
         .sortUp:after {border-bottom: none;border-left: 4px solid transparent;border-right: 4px solid transparent;border-top: 4px solid #000;visibility: visible;}\
+        .selectedItem {background-color: #f5f5f5}\
     </style>');
 
     templateEngine.addTemplate = function(templateName, templateMarkup) {
@@ -125,7 +129,7 @@
 
     templateEngine.addTemplate("ko_table_body", '\
                         <tbody data-bind="foreach: items">\
-                            <tr data-bind="click: $root.selectItem, style: {\'background-color\': $root.selectedItem() === $data ? \'#f5f5f5\' : \'inherit\'}">\
+                            <tr data-bind="click: $root.selectItem, css: {selectedItem : $root.comparator($root.selectedItem(), $data)}">\
                                 <!-- ko foreach: $parent.columns -->\
                                     <td data-bind="text: typeof value == \'function\' ? value($parent) : $parent[value] "></td>\
                                 <!-- /ko -->\
