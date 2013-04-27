@@ -10,6 +10,7 @@
 
         self.name = column.name || "";
         self.value = column.value;
+        self.template = column.template;
         self.sortable = column.sortable;
         self.sortField = column.sortField;
         self.width = column.width;
@@ -76,13 +77,25 @@
             self.moveToPage = function (index) {
                 self.pageIndex(index - 1);
             };
-            self.reload = function() {
+            self.reload = function(preserveSelection) {
                 self.loader(self.pageIndex() + 1, self.pageSize(), (self.sorting.sortColumn ? self.sorting.sortColumn.sortField : ""), self.sorting.sortOrder, function (data) {
                     self.items(data.content);
+                    if (preserveSelection === true) {
+                        self.restoreSelection();
+                    }
                     self.pageIndex(Math.min(data.number, data.totalPages - 1));
                     self.totalPages(data.totalPages);
                     self.pageSize(data.size);
                 });
+            };
+            self.restoreSelection = function() {
+                var selection = self.selectedItem(), items = self.items(), newSelection = null;
+                if (selection) {
+                    for (i = 0; i < items.length; i++) {
+                        if (self.comparator(items[i], selection)) { newSelection = items[i]; break;}
+                    }
+                }
+                self.selectItem(newSelection)
             };
             self.content = ko.computed(self.reload);
             self.selectItem = function selectItem(item) {
@@ -131,7 +144,12 @@
                         <tbody data-bind="foreach: items">\
                             <tr data-bind="click: $root.selectItem, css: {selectedItem : $root.comparator($root.selectedItem(), $data)}">\
                                 <!-- ko foreach: $parent.columns -->\
-                                    <td data-bind="text: typeof value == \'function\' ? value($parent) : $parent[value] "></td>\
+                                    <!-- ko if: template -->\
+                                        <td data-bind="template: { name: template, data: typeof value == \'function\' ? value($parent) : $parent[value] }"></td>\
+                                    <!-- /ko -->\
+                                    <!-- ko ifnot: template -->\
+                                        <td data-bind="text: typeof value == \'function\' ? value($parent) : $parent[value] "></td>\
+                                    <!-- /ko -->\
                                 <!-- /ko -->\
                             </tr>\
                         </tbody>');
