@@ -39,6 +39,13 @@ Knockout pageable and sortable data table
 
     <table data-bind="dataTable: tableViewModel"><!-- --></table>
 
+    <script type="text/html" id="actionColumnTemplate">
+        <![CDATA[
+            <button class="btn btn-info" type="submit" data-bind="click: function(data, event) {
+                $root.like(data, event)}, clickBubble: false">Like</button>
+        ]]>
+    </script>
+
 ###ViewModel
 
     $(function () {
@@ -64,6 +71,17 @@ Knockout pageable and sortable data table
                 selectItem: self.selectedFramework,
                 pageSize: 10
             });
+            self.tableViewModel.like =  function(framework, event) {
+                console.log("your code goes here: " + framework.name + " , " + event.type);
+                console.log("e.g. update data by ajax and reload table preserving selection");
+                $.ajax({
+                    url:'/frameworks/like',
+                    type:'POST',
+                    data:{'id': framework.id}
+                }).success(function (messages) {
+                    self.tableViewModel.reload(true /** true if selection should be preserved on data reload */);
+                });
+            };
         };
         ko.applyBindings(new ExamplePageViewModel());
     });
