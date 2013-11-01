@@ -22,6 +22,7 @@
             var self = this;
 
             self.sortable = config.sortable || false;
+            self.throttle = config.throttle || 100;
             self.loader  = config.loader;
             self.selectedItem = ko.observableArray();
             self.items = ko.observableArray(config.items || []);
@@ -97,7 +98,7 @@
                 }
                 self.selectItem(newSelection)
             };
-            self.content = ko.computed(self.reload);
+            self.content = ko.computed(self.reload).extend({ throttle:self.throttle });
             self.selectItem = function selectItem(item) {
                 self.selectedItem(item);
                 if (config.selectItem) {
