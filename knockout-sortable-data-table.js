@@ -158,7 +158,7 @@
     templateEngine.addTemplate("ko_table_pager", '\
         <tfoot>\
         <tr>\
-        <td colspan="10">\
+        <td data-bind="attr: {colspan: columns.length}">\
             <div data-bind="foreach: [10, 25, 50, 100]">\
                 <!-- ko if: $data == $root.pageSize() -->\
                     <span data-bind="text: $data + \' \'"/>\
