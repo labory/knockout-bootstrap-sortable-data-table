@@ -136,7 +136,7 @@
                                    <th class="header" data-bind="text: name, css: cssClass, style: { width: width }, click: $root.sort"></th>\
                                <!-- /ko -->\
                                <!-- ko ifnot: $data.sortable -->\
-                                   <th class="header" data-bind="text: name"></th>\
+                                   <th class="header" data-bind="text: name, css: cssClass, style: { width: width }"></th>\
                                <!-- /ko -->\
                             </tr>\
                         </thead>');
