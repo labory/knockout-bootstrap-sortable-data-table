@@ -1,0 +1,22 @@
+{
+  "name": "knockout-sortable-data-table",
+  "main": "knockout-sortable-data-table.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/labory/knockout-bootstrap-sortable-data-table/",
+  "authors": [
+    "labory"
+  ],
+  "description": "Knockout pageable and sortable data table",
+  "keywords": [
+    "table",
+    "search",
+    "sort",
+    "table",
+    "dom",
+    "html",
+    "ui",
+    "knockout",
+    "bootstrap"
+  ],
+  "license": "MIT"
+}
