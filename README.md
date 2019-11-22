@@ -35,7 +35,7 @@ Knockout pageable and sortable data table
 
 ### Row Action Example
 ![Row Action Example](https://raw.github.com/labory/knockout-bootstrap-sortable-data-table/master/assets/data-row-action-example.png)
-###View
+### View
 
     <table data-bind="dataTable: tableViewModel"><!-- --></table>
 
