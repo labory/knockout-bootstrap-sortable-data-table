@@ -1,13 +1,13 @@
 Knockout pageable and sortable data table
 =============================
 
-###Basic
+### Basic
 ![Basic Example](https://raw.github.com/labory/knockout-bootstrap-sortable-data-table/master/assets/basic-example.png)
-###View
+### View
 
     <table data-bind="dataTable: tableViewModel"><!-- --></table>
 
-###ViewModel
+### ViewModel
 
     $(function () {
         var ExamplePageViewModel = function() {
@@ -33,7 +33,7 @@ Knockout pageable and sortable data table
         ko.applyBindings(new ExamplePageViewModel());
     });
 
-###Row Action Example
+### Row Action Example
 ![Row Action Example](https://raw.github.com/labory/knockout-bootstrap-sortable-data-table/master/assets/data-row-action-example.png)
 ###View
 
@@ -46,7 +46,7 @@ Knockout pageable and sortable data table
         ]]>
     </script>
 
-###ViewModel
+### ViewModel
 
     $(function () {
         var ExamplePageViewModel = function() {
@@ -86,7 +86,7 @@ Knockout pageable and sortable data table
         ko.applyBindings(new ExamplePageViewModel());
     });
     
-###Possible Backend Implementation (Spring Data)
+### Possible Backend Implementation (Spring Data)
 
     @RequestMapping(value = "/frameworks", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody Page<Framework> getFrameworks(@PageableDefaults(
@@ -95,7 +95,7 @@ Knockout pageable and sortable data table
     }
 
     
-###Dependencies
+### Dependencies
   * Knockout
   * Jquery
   * bootstrap pagination css
